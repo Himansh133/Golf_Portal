@@ -1,66 +1,74 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <>
+      {/* Hero */}
+      <section className="hero">
+        <div className="hero-content fade-in">
+          <h1>Play Golf. <span>Win Prizes.</span> Change Lives.</h1>
+          <p>Subscribe, enter your Stableford scores, and compete in monthly draws — all while supporting the charities you care about most.</p>
+          <div className="hero-buttons">
+            <Link href="/signup" className="btn btn-primary">Start Your Journey</Link>
+            <Link href="/charities" className="btn btn-secondary">Explore Charities</Link>
+          </div>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* How it Works */}
+      <section className="section" style={{ background: 'var(--bg-secondary)' }}>
+        <div className="container">
+          <h2 className="section-title" style={{ textAlign: 'center' }}>How It Works</h2>
+          <p className="section-subtitle" style={{ textAlign: 'center' }}>Four simple steps to play, win, and give back</p>
+          <div className="grid-3" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))' }}>
+            {[
+              { n: '1', title: 'Subscribe', desc: 'Choose monthly or yearly. A portion goes to your favourite charity.' },
+              { n: '2', title: 'Enter Scores', desc: 'Submit your latest 5 Stableford scores. Quick and simple.' },
+              { n: '3', title: 'Monthly Draw', desc: 'Your scores become your numbers. Match to win from the prize pool.' },
+              { n: '4', title: 'Give Back', desc: 'Every subscription supports charities. You decide where it goes.' },
+            ].map((s) => (
+              <div key={s.n} className="card fade-in" style={{ textAlign: 'center' }}>
+                <div className="step-number" style={{ margin: '0 auto 16px' }}>{s.n}</div>
+                <h3 style={{ marginBottom: 8, fontWeight: 700 }}>{s.title}</h3>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{s.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Prize Tiers */}
+      <section className="section">
+        <div className="container" style={{ maxWidth: 600 }}>
+          <h2 className="section-title" style={{ textAlign: 'center' }}>Prize Pool Breakdown</h2>
+          <p className="section-subtitle" style={{ textAlign: 'center' }}>Every month, a share of subscriptions fuels the prize pool</p>
+          <div className="card card-glow">
+            <div className="prize-tier">
+              <div><strong>5-Number Match</strong><br/><span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Jackpot — rolls over if unclaimed</span></div>
+              <div className="prize-share">40%</div>
+            </div>
+            <div className="prize-tier">
+              <div><strong>4-Number Match</strong></div>
+              <div className="prize-share">35%</div>
+            </div>
+            <div className="prize-tier">
+              <div><strong>3-Number Match</strong></div>
+              <div className="prize-share">25%</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="section" style={{ background: 'var(--bg-secondary)', textAlign: 'center' }}>
+        <div className="container">
+          <h2 className="section-title">Ready to Make a Difference?</h2>
+          <p className="section-subtitle">Join golfers who play with purpose.</p>
+          <Link href="/signup" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '16px 40px' }}>
+            Subscribe Now
+          </Link>
+        </div>
+      </section>
+    </>
   );
 }
