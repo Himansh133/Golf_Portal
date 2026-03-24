@@ -9,7 +9,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const supabase = createBrowserSupabaseClient();
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
   const handleSubmit = async (e) => {
     e.preventDefault();

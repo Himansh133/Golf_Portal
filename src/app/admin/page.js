@@ -15,7 +15,7 @@ export default function AdminOverview() {
       const totalPool = draws.reduce((s, d) => s + parseFloat(d.prize_pool_total || 0), 0);
       setStats({ users: users.length, active: activeUsers, pool: totalPool, charities: charities.length });
       setLoading(false);
-    });
+    }).catch(() => setLoading(false));
   }, []);
 
   if (loading) return <div style={{ padding: 60, textAlign: 'center' }}><div className="loading-spinner" style={{ margin: '0 auto' }}></div></div>;

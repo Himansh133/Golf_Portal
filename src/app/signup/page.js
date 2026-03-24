@@ -8,7 +8,7 @@ export default function SignupPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const supabase = createBrowserSupabaseClient();
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
   const handleSubmit = async (e) => {
     e.preventDefault();

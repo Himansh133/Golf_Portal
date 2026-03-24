@@ -7,7 +7,7 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
   const [profile, setProfile] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const supabase = createBrowserSupabaseClient();
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -17,7 +17,7 @@ export default function Navbar() {
           .then(({ data }) => setProfile(data));
       }
     });
-  }, []);
+  }, [supabase]);
 
   const handleLogout = async () => {
     await supabase.auth.signOut();

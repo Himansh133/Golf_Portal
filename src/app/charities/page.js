@@ -9,7 +9,8 @@ export default function CharitiesPage() {
   useEffect(() => {
     fetch(`/api/charities?search=${search}`)
       .then(r => r.json())
-      .then(data => { setCharities(data); setLoading(false); });
+      .then(data => { setCharities(data); setLoading(false); })
+      .catch(() => { setCharities([]); setLoading(false); });
   }, [search]);
 
   return (
@@ -42,7 +43,7 @@ export default function CharitiesPage() {
                 <h3 style={{ fontWeight: 700, marginBottom: 8 }}>{c.name}</h3>
                 {c.featured && <span className="badge badge-accent" style={{ marginBottom: 8 }}>Featured</span>}
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{c.description || 'Supporting great causes through golf.'}</p>
-                {c.website && <a href={c.website} target="_blank" rel="noopener" style={{ fontSize: '0.85rem', marginTop: 12, display: 'inline-block' }}>Visit Website →</a>}
+                {c.website && <a href={c.website} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.85rem', marginTop: 12, display: 'inline-block' }}>Visit Website →</a>}
               </div>
             ))}
           </div>

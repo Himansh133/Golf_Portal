@@ -13,9 +13,9 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
   const [scoreForm, setScoreForm] = useState({ score: '', played_date: '' });
   const [msg, setMsg] = useState('');
-  const supabase = createBrowserSupabaseClient();
+  const [supabase] = useState(() => createBrowserSupabaseClient());
 
-  useEffect(() => { loadData(); }, []);
+  useEffect(() => { loadData(); }, [supabase]);
 
   async function loadData() {
     const { data: { user } } = await supabase.auth.getUser();
@@ -24,15 +24,15 @@ export default function DashboardPage() {
 
     const [profileRes, charitiesRes] = await Promise.all([
       supabase.from('profiles').select('*').eq('id', user.id).single(),
-      fetch('/api/charities').then(r => r.json()),
+      fetch('/api/charities').then(r => r.json()).catch(() => []),
     ]);
     setProfile(profileRes.data);
     setCharities(charitiesRes);
 
     const [scoresRes, winnersRes, drawsRes] = await Promise.all([
-      fetch(`/api/scores?user_id=${user.id}`).then(r => r.json()),
-      fetch(`/api/winners?user_id=${user.id}`).then(r => r.json()),
-      fetch('/api/draws').then(r => r.json()),
+      fetch(`/api/scores?user_id=${user.id}`).then(r => r.json()).catch(() => []),
+      fetch(`/api/winners?user_id=${user.id}`).then(r => r.json()).catch(() => []),
+      fetch('/api/draws').then(r => r.json()).catch(() => []),
     ]);
     setScores(scoresRes);
     setWinners(winnersRes || []);
