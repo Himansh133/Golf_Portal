@@ -2,20 +2,13 @@
 
 A production-ready, subscription-based web application that combines golf performance tracking with monthly prize draws and charitable giving.
 
-> **🌐 Live Demo:** [golf-portal.vercel.app](https://golf-portal.vercel.app) _(replace with your actual Vercel URL)_
-
----
+> **Live Demo:** [golf-portal.vercel.app](https://golf-portal-dt8c.vercel.app/) 
 
 ## Screenshots
 
-| Landing Page | User Dashboard | Admin Panel |
-|:---:|:---:|:---:|
-| ![Landing](./screenshots/landing.png) | ![Dashboard](./screenshots/dashboard.png) | ![Admin](./screenshots/admin.png) |
-
-> 💡 _Add screenshots by creating a `screenshots/` folder and saving images there._
-
----
-
+| Landing Page | User Dashboard | Charities | Payment |
+|:---:|:---:|:---:|:---:|
+| ![Landing](./screenshots/landing.png) | ![Dashboard](./screenshots/dashboard.png) | ![Charities](./screenshots/charities.png) | ![Payment](./screenshots/payment.png) |
 ## Tech Stack
 
 | Layer | Technology |
