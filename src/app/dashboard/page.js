@@ -62,10 +62,17 @@ export default function DashboardPage() {
     setMsg('Charity updated!');
   }
 
-  async function updateCharityPct(pct) {
-    const val = Math.max(10, Math.min(100, parseInt(pct) || 10));
+  function updateCharityPct(pct) {
+    const val = parseInt(pct);
+    setProfile({ ...profile, charity_percentage: isNaN(val) ? '' : val });
+  }
+
+  async function saveCharityPct() {
+    const val = Math.max(10, Math.min(100, parseInt(profile?.charity_percentage) || 10));
     await supabase.from('profiles').update({ charity_percentage: val }).eq('id', user.id);
     setProfile({ ...profile, charity_percentage: val });
+    setMsg('Charity percentage saved!');
+    setTimeout(() => setMsg(''), 3000);
   }
 
   async function subscribe(plan) {
@@ -188,7 +195,7 @@ export default function DashboardPage() {
 
             <div className="form-group">
               <label className="form-label">Contribution % (min 10%)</label>
-              <input className="form-input" type="number" min="10" max="100" value={profile?.charity_percentage || 10} onChange={e => updateCharityPct(e.target.value)} />
+              <input className="form-input" type="number" min="10" max="100" value={profile?.charity_percentage ?? 10} onChange={e => updateCharityPct(e.target.value)} onBlur={saveCharityPct} />
             </div>
 
             <h4 style={{ fontWeight: 600, marginTop: 24, marginBottom: 12 }}>Winnings</h4>
